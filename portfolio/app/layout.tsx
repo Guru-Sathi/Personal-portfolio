@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Guru Prakash KS portfolio",
   description: "Systems-focused software engineer and algorithmic trader",
 };
 
