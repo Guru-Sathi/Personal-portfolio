@@ -1,6 +1,6 @@
-import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
+import { BentoGrid, BentoCard, SkillTag } from "@/components/ui/bento-grid";
 import { ActivityHeatmap } from "@/components/ui/heatmap";
-import { Terminal, Database, Bot, Mic, Lightbulb, Github, Twitter, Linkedin, ArrowUpRight, Mail, Phone } from "lucide-react";
+import { Terminal, Database, Bot, Mic, Lightbulb, Github, Twitter, Linkedin, ArrowUpRight, Mail, Phone, Trophy, Cpu } from "lucide-react";
 
 export default function Home() {
   return (
@@ -168,12 +168,70 @@ export default function Home() {
              </div>
            </BentoCard>
 
-          {/* 7. github activity */}
+           {/* 7. Tech Achievements */}
+           <BentoCard className="md:col-span-1 min-h-[220px]">
+             <div className="flex flex-col h-full justify-between">
+                <div className="flex justify-between items-start">
+                    <Trophy className="h-6 w-6 text-orange-400" />
+                    <span className="text-xs font-mono text-orange-400/80 bg-orange-950/30 border border-orange-900/50 px-2 py-1 rounded">
+                      ACHIEVEMENTS
+                    </span>
+                </div>
+                 <div className="flex flex-col gap-4">
+                    <div>
+                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">Global Rust Hackathon</h3>
+                        <p className="text-xs text-zinc-400">
+                            Winner - Best Systems Tool category.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">ICPC Regionalist</h3>
+                        <p className="text-xs text-zinc-400">
+                            Top 50 team in Asia West continent.
+                        </p>
+                    </div>
+                </div>
+             </div>
+           </BentoCard>
+
+           {/* 8. Skills & Knowledge */}
+           <BentoCard className="md:col-span-2 min-h-[220px]">
+             <div className="flex flex-col h-full justify-between">
+                <div className="flex justify-between items-start">
+                    <Cpu className="h-6 w-6 text-cyan-400" />
+                    <span className="text-xs font-mono text-cyan-400/80 bg-cyan-950/30 border border-cyan-900/50 px-2 py-1 rounded">
+                      SKILLS
+                    </span>
+                </div>
+                 <div className="flex flex-col gap-4">
+                    <h3 className="font-semibold text-lg mb-2 text-zinc-200">Technical Arsenal</h3>
+                    <div className="flex flex-wrap gap-2">
+                        <SkillTag variant="default" glowing>Rust</SkillTag>
+                        <SkillTag variant="default" glowing>Go</SkillTag>
+                        <SkillTag>C++</SkillTag>
+                        <SkillTag>Python</SkillTag>
+                        <SkillTag>TypeScript</SkillTag>
+                        <SkillTag>System Design</SkillTag>
+                        <SkillTag>Distributed Systems</SkillTag>
+                        <SkillTag>Kubernetes</SkillTag>
+                        <SkillTag>Docker</SkillTag>
+                        <SkillTag>Kafka</SkillTag>
+                        <SkillTag>PostgreSQL</SkillTag>
+                        <SkillTag>AWS</SkillTag>
+                        <SkillTag>Terraform</SkillTag>
+                        <SkillTag>gRPC</SkillTag>
+                        <SkillTag>CI/CD</SkillTag>
+                    </div>
+                </div>
+             </div>
+           </BentoCard>
+
+          {/* 9. github activity */}
           <BentoCard className="md:col-span-3">
              <ActivityHeatmap title="github activity" />
           </BentoCard>
 
-          {/* 8. Leetcode Activity */}
+          {/* 10. Leetcode Activity */}
           <BentoCard className="md:col-span-3">
              <ActivityHeatmap title="Leetcode Activity" variant="orange" />
           </BentoCard>
