@@ -1,6 +1,6 @@
-import { BentoGrid, BentoCard, SkillTag } from "@/components/ui/bento-grid";
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
 import { ActivityHeatmap } from "@/components/ui/heatmap";
-import { Terminal, Database, Bot, Mic, Lightbulb, Github, Twitter, Linkedin, ArrowUpRight } from "lucide-react";
+import { Terminal, Database, Bot, Mic, Lightbulb, Github, Twitter, Linkedin, ArrowUpRight, Mail, Phone } from "lucide-react";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         </header>
 
         <BentoGrid>
-          {/* Hero / About Section */}
+          {/* 1. About */}
           <BentoCard className="md:col-span-2 md:row-span-1">
             <div className="flex flex-col h-full justify-between">
               <div className="flex items-start justify-between">
@@ -26,7 +26,7 @@ export default function Home() {
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Engineering with Precision</h3>
+                <h3 className="text-lg font-semibold mb-2">About</h3>
                 <p className="text-zinc-400 text-sm">
                   Building high-performance systems and low-latency trading infrastructure.
                   Obsessed with optimization, clean architecture, and minimalistic design.
@@ -35,169 +35,147 @@ export default function Home() {
             </div>
           </BentoCard>
 
-          {/* Socials */}
+          {/* 2. Social media, contact details */}
           <BentoCard className="md:col-span-1 md:row-span-1">
              <div className="flex flex-col h-full justify-between">
-              <div className="flex items-start justify-between">
-                <div className="flex gap-2">
-                    <div className="h-3 w-3 rounded-full bg-red-500" />
-                    <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                    <div className="h-3 w-3 rounded-full bg-green-500" />
+              <h3 className="text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2 mb-2">
+                Social media, contact details
+              </h3>
+              <div className="flex flex-col gap-4 items-center justify-center h-full">
+                <div className="flex gap-4">
+                    <a href="https://github.com/guruprakash273" className="p-2 hover:bg-zinc-800 rounded-full transition-colors">
+                        <Github className="h-6 w-6" />
+                    </a>
+                    <a href="https://twitter.com/guruprakash273" className="p-2 hover:bg-zinc-800 rounded-full transition-colors">
+                        <Twitter className="h-6 w-6" />
+                    </a>
+                    <a href="https://linkedin.com/in/guruprakash273" className="p-2 hover:bg-zinc-800 rounded-full transition-colors">
+                        <Linkedin className="h-6 w-6" />
+                    </a>
                 </div>
-              </div>
-              <div className="flex gap-4 items-center justify-center h-full">
-                <a href="#" className="p-2 hover:bg-zinc-800 rounded-full transition-colors">
-                    <Github className="h-6 w-6" />
-                </a>
-                <a href="#" className="p-2 hover:bg-zinc-800 rounded-full transition-colors">
-                    <Twitter className="h-6 w-6" />
-                </a>
-                <a href="#" className="p-2 hover:bg-zinc-800 rounded-full transition-colors">
-                    <Linkedin className="h-6 w-6" />
-                </a>
+                <div className="flex flex-col items-center gap-2 text-sm text-zinc-400">
+                    <a href="mailto:guruprakash273@gmail.com" className="flex items-center gap-2 hover:text-zinc-200 transition-colors">
+                        <Mail className="h-4 w-4" /> guruprakash273@gmail.com
+                    </a>
+                    <a href="tel:+919080007202" className="flex items-center gap-2 hover:text-zinc-200 transition-colors">
+                        <Phone className="h-4 w-4" /> +91 9080007202
+                    </a>
+                </div>
               </div>
             </div>
           </BentoCard>
 
-           {/* Capstone 1: S3 Storage */}
+           {/* 3. Capstone projects */}
            <BentoCard className="md:col-span-2 min-h-[220px]">
              <div className="flex flex-col h-full justify-between">
                 <div className="flex justify-between items-start">
                     <Database className="h-8 w-8 text-emerald-500" />
                     <span className="text-xs font-mono text-emerald-400/80 bg-emerald-950/30 border border-emerald-900/50 px-2 py-1 rounded">
-                      CAPSTONE
+                      CAPSTONE PROJECTS
                     </span>
                 </div>
-                <div>
-                    <h3 className="font-semibold text-xl mb-2 text-zinc-100">Distributed Object Storage</h3>
-                    <p className="text-zinc-400 text-sm mb-4 max-w-lg">
-                        A scalable, S3-compatible object storage system built from scratch. Features Erasure Coding,
-                        distributed consistency, and high availability.
-                    </p>
-                    <a href="#s3-deep-dive" className="inline-flex items-center text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors group/link">
-                        Technical Deep Dive <ArrowUpRight className="ml-1 h-3 w-3 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
-                    </a>
+                <div className="flex flex-col gap-4">
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-lg text-zinc-100">Distributed Object Storage</h3>
+                            <a href="#s3-deep-dive" className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors">
+                                <ArrowUpRight className="h-4 w-4" />
+                            </a>
+                        </div>
+                        <p className="text-zinc-400 text-xs">
+                            Scalable, S3-compatible storage with Erasure Coding.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                             <h3 className="font-semibold text-lg text-zinc-100">Algo-Trading Bot</h3>
+                             <a href="#algo-deep-dive" className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors">
+                                <ArrowUpRight className="h-4 w-4" />
+                             </a>
+                        </div>
+                        <p className="text-zinc-400 text-xs">
+                            Low-latency market making bot in Rust.
+                        </p>
+                    </div>
                 </div>
              </div>
            </BentoCard>
 
-           {/* Hobby 1: Tamil AI Podcast */}
+           {/* 4. Hobby projects */}
            <BentoCard className="md:col-span-1 min-h-[220px]" variant="creative">
              <div className="flex flex-col h-full justify-between">
                 <div className="flex justify-between items-start">
                     <Mic className="h-6 w-6 text-purple-400" />
                     <span className="text-xs font-mono text-purple-400/80 bg-purple-950/30 border border-purple-900/50 px-2 py-1 rounded">
-                      CREATIVE
+                      HOBBY PROJECTS
+                    </span>
+                </div>
+                 <div className="flex flex-col gap-4">
+                    <div>
+                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">Tamil AI Podcast</h3>
+                        <p className="text-xs text-zinc-400">
+                            Democratizing AI knowledge.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">Civic-Tech Ideas</h3>
+                        <p className="text-xs text-zinc-400">
+                            Open-source tools for governance.
+                        </p>
+                    </div>
+                </div>
+             </div>
+           </BentoCard>
+
+           {/* 5. Open source contributions */}
+           <BentoCard className="md:col-span-1 min-h-[220px]">
+             <div className="flex flex-col h-full justify-between">
+                <div className="flex justify-between items-start">
+                    <Github className="h-6 w-6 text-blue-400" />
+                    <span className="text-xs font-mono text-blue-400/80 bg-blue-950/30 border border-blue-900/50 px-2 py-1 rounded">
+                      OPEN SOURCE CONTRIBUTIONS
                     </span>
                 </div>
                  <div>
-                    <h3 className="font-semibold text-lg mb-1 text-zinc-200">Tamil AI Podcast</h3>
-                    <p className="text-xs text-zinc-400">
-                        Democratizing AI knowledge for the Tamil-speaking community. Weekly episodes on LLMs and GenAI.
+                    <h3 className="font-semibold text-lg mb-2 text-zinc-200">Contributions</h3>
+                    <p className="text-sm text-zinc-400">
+                        Active contributor to high-performance systems and developer tooling ecosystems.
+                        Focused on Rust and Go projects.
                     </p>
                 </div>
              </div>
            </BentoCard>
 
-           {/* Capstone 2: Algo Trading */}
+           {/* 6. Tech blogs */}
            <BentoCard className="md:col-span-2 min-h-[220px]">
              <div className="flex flex-col h-full justify-between">
                 <div className="flex justify-between items-start">
-                    <Bot className="h-8 w-8 text-emerald-500" />
-                    <span className="text-xs font-mono text-emerald-400/80 bg-emerald-950/30 border border-emerald-900/50 px-2 py-1 rounded">
-                      CAPSTONE
+                    <Lightbulb className="h-6 w-6 text-yellow-400" />
+                    <span className="text-xs font-mono text-yellow-400/80 bg-yellow-950/30 border border-yellow-900/50 px-2 py-1 rounded">
+                      TECH BLOGS
                     </span>
                 </div>
-                <div>
-                    <h3 className="font-semibold text-xl mb-2 text-zinc-100">Algo-Trading Bot</h3>
-                    <p className="text-zinc-400 text-sm mb-4 max-w-lg">
-                        Low-latency market making bot written in Rust. Implements custom order book management
-                        and execution strategies on centralized exchanges.
+                 <div>
+                    <h3 className="font-semibold text-lg mb-2 text-zinc-200">Technical Insights</h3>
+                    <p className="text-sm text-zinc-400 mb-4">
+                        Deep dives into system architecture, low-latency optimization, and distributed systems patterns.
+                        Sharing knowledge on building scalable infrastructure.
                     </p>
-                    <a href="#algo-deep-dive" className="inline-flex items-center text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors group/link">
-                        Technical Deep Dive <ArrowUpRight className="ml-1 h-3 w-3 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+                    <a href="#" className="text-xs text-yellow-400 hover:text-yellow-300 transition-colors">
+                        Read latest articles &rarr;
                     </a>
                 </div>
              </div>
            </BentoCard>
 
-           {/* Hobby 2: Civic Tech */}
-           <BentoCard className="md:col-span-1 min-h-[220px]" variant="creative">
-             <div className="flex flex-col h-full justify-between">
-                <div className="flex justify-between items-start">
-                    <Lightbulb className="h-6 w-6 text-purple-400" />
-                    <span className="text-xs font-mono text-purple-400/80 bg-purple-950/30 border border-purple-900/50 px-2 py-1 rounded">
-                      IMPACT
-                    </span>
-                </div>
-                 <div>
-                    <h3 className="font-semibold text-lg mb-1 text-zinc-200">Civic-Tech Ideas</h3>
-                    <p className="text-xs text-zinc-400">
-                        Open-source tools for better governance and community engagement. Technology for social good.
-                    </p>
-                </div>
-             </div>
-           </BentoCard>
-
-           {/* Knowledge Graph */}
-           <BentoCard className="md:col-span-3 min-h-[200px]">
-             <div className="flex flex-col h-full">
-                <div className="flex items-center gap-3 mb-6">
-                    <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <h3 className="font-mono text-sm tracking-wider text-zinc-400">THE KNOWLEDGE GRAPH</h3>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Systems */}
-                    <div className="space-y-3">
-                        <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2">Systems</h4>
-                        <div className="flex flex-wrap gap-2">
-                            <SkillTag glowing={true}>Rust</SkillTag>
-                            <SkillTag>C++</SkillTag>
-                            <SkillTag>Go</SkillTag>
-                            <SkillTag>Linux Kernel</SkillTag>
-                            <SkillTag>eBPF</SkillTag>
-                            <SkillTag>Docker</SkillTag>
-                        </div>
-                    </div>
-
-                    {/* Web */}
-                    <div className="space-y-3">
-                        <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2">Web</h4>
-                        <div className="flex flex-wrap gap-2">
-                            <SkillTag glowing={true}>Next.js</SkillTag>
-                            <SkillTag>React</SkillTag>
-                            <SkillTag>TypeScript</SkillTag>
-                            <SkillTag>Tailwind CSS</SkillTag>
-                            <SkillTag>PostgreSQL</SkillTag>
-                            <SkillTag>Redis</SkillTag>
-                        </div>
-                    </div>
-
-                    {/* Finance */}
-                    <div className="space-y-3">
-                        <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2">Finance</h4>
-                        <div className="flex flex-wrap gap-2">
-                            <SkillTag glowing={true}>QuantLib</SkillTag>
-                            <SkillTag>Python</SkillTag>
-                            <SkillTag>Pandas</SkillTag>
-                            <SkillTag>Time Series</SkillTag>
-                            <SkillTag>Smart Contracts</SkillTag>
-                            <SkillTag>Solana</SkillTag>
-                        </div>
-                    </div>
-                </div>
-             </div>
-           </BentoCard>
-
-          {/* Activity Heatmap */}
+          {/* 7. github activity */}
           <BentoCard className="md:col-span-3">
-             <ActivityHeatmap />
+             <ActivityHeatmap title="github activity" />
           </BentoCard>
 
-          {/* LeetCode Heatmap */}
+          {/* 8. Leetcode Activity */}
           <BentoCard className="md:col-span-3">
-             <ActivityHeatmap title="LeetCode Progress" variant="orange" />
+             <ActivityHeatmap title="Leetcode Activity" variant="orange" />
           </BentoCard>
 
         </BentoGrid>
