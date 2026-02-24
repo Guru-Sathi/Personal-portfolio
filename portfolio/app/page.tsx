@@ -8,7 +8,7 @@ export default function Home() {
       <div className="w-full max-w-7xl space-y-8 pt-8 md:pt-16">
         <header className="mb-12">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-            John Doe
+            Guru Prakash KS
           </h1>
           <p className="text-xl md:text-2xl text-zinc-400 font-mono">
             Systems Engineer & Algorithmic Trader
@@ -95,6 +95,11 @@ export default function Home() {
           {/* Activity Heatmap */}
           <BentoCard className="md:col-span-3">
              <ActivityHeatmap />
+          </BentoCard>
+
+          {/* LeetCode Heatmap */}
+          <BentoCard className="md:col-span-3">
+             <ActivityHeatmap title="LeetCode Progress" variant="orange" />
           </BentoCard>
 
         </BentoGrid>

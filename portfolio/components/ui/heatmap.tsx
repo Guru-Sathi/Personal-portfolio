@@ -9,7 +9,15 @@ interface ActivityDay {
   count: number;
 }
 
-export const ActivityHeatmap = () => {
+interface ActivityHeatmapProps {
+  title?: string;
+  variant?: "green" | "orange";
+}
+
+export const ActivityHeatmap = ({
+  title = "Activity",
+  variant = "green",
+}: ActivityHeatmapProps) => {
   const [data, setData] = useState<ActivityDay[]>([]);
 
   useEffect(() => {
@@ -32,6 +40,15 @@ export const ActivityHeatmap = () => {
 
   const getColor = (count: number) => {
     if (count === 0) return "bg-zinc-900"; // Empty
+
+    if (variant === "orange") {
+      if (count === 1) return "bg-orange-900/40"; // Low
+      if (count === 2) return "bg-orange-700/60"; // Medium
+      if (count === 3) return "bg-orange-500/80"; // High
+      return "bg-orange-400"; // Very High
+    }
+
+    // Default green
     if (count === 1) return "bg-emerald-900/40"; // Low
     if (count === 2) return "bg-emerald-700/60"; // Medium
     if (count === 3) return "bg-emerald-500/80"; // High
@@ -50,7 +67,7 @@ export const ActivityHeatmap = () => {
   return (
     <div className="flex flex-col gap-4 w-full h-full p-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-mono text-zinc-400">Activity</h3>
+        <h3 className="text-sm font-mono text-zinc-400">{title}</h3>
         <span className="text-xs font-mono text-zinc-500">Last 365 days</span>
       </div>
 
