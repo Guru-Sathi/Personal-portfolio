@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -12,31 +11,14 @@ interface ActivityDay {
 interface ActivityHeatmapProps {
   title?: string;
   variant?: "green" | "orange";
+  data: ActivityDay[];
 }
 
 export const ActivityHeatmap = ({
   title = "Activity",
   variant = "green",
+  data,
 }: ActivityHeatmapProps) => {
-  const [data, setData] = useState<ActivityDay[]>([]);
-
-  useEffect(() => {
-    const days: ActivityDay[] = [];
-    const today = new Date();
-    // Start from 364 days ago to have exactly 52 weeks + 1 day = 365 days
-    for (let i = 364; i >= 0; i--) {
-      const d = new Date(today);
-      d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split("T")[0];
-
-      // Random activity count with higher probability of 0
-      // 70% chance of 0, 30% chance of 1-4
-      const count = Math.random() > 0.7 ? 0 : Math.floor(Math.random() * 4) + 1;
-
-      days.push({ date: dateStr, count });
-    }
-    setData(days);
-  }, []);
 
   const getColor = (count: number) => {
     if (count === 0) return "bg-zinc-900"; // Empty
@@ -55,7 +37,7 @@ export const ActivityHeatmap = ({
     return "bg-emerald-400"; // Very High
   };
 
-  if (data.length === 0) {
+  if (!data || data.length === 0) {
     return (
       <div className="flex flex-col gap-2 w-full h-full p-4 animate-pulse">
         <div className="h-4 w-24 bg-zinc-800 rounded"></div>

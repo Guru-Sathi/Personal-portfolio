@@ -1,8 +1,14 @@
 import { BentoGrid, BentoCard, SkillTag } from "@/components/ui/bento-grid";
 import { ActivityHeatmap } from "@/components/ui/heatmap";
-import { Terminal, Database, Bot, Mic, Lightbulb, Github, Twitter, Linkedin, ArrowUpRight, Mail, Phone, Trophy, Cpu } from "lucide-react";
+import { Terminal, Database, Mic, Lightbulb, Github, Twitter, Linkedin, ArrowUpRight, Mail, Phone, Trophy, Cpu } from "lucide-react";
+import { fetchGithubActivity, fetchLeetCodeActivity } from "@/lib/fetch-activity";
 
-export default function Home() {
+export default async function Home() {
+  const [githubData, leetcodeData] = await Promise.all([
+    fetchGithubActivity(),
+    fetchLeetCodeActivity(),
+  ]);
+
   return (
     <main className="min-h-screen bg-background text-foreground p-4 md:p-8 flex justify-center">
       <div className="w-full max-w-7xl space-y-8 pt-8 md:pt-16">
@@ -228,12 +234,12 @@ export default function Home() {
 
           {/* 9. github activity */}
           <BentoCard className="md:col-span-3">
-             <ActivityHeatmap title="github activity" />
+             <ActivityHeatmap title="github activity" data={githubData} />
           </BentoCard>
 
           {/* 10. Leetcode Activity */}
           <BentoCard className="md:col-span-3">
-             <ActivityHeatmap title="Leetcode Activity" variant="orange" />
+             <ActivityHeatmap title="Leetcode Activity" variant="orange" data={leetcodeData} />
           </BentoCard>
 
         </BentoGrid>
