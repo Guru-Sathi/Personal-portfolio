@@ -30,13 +30,12 @@ export async function fetchGithubActivity(): Promise<ActivityDay[]> {
     // API returns object with "contributions" array like: { date: "2024-01-01", count: 5, level: 2 }
     if (!data.contributions) return [];
 
-    // Filter to last 365 days and map to our format
-    const today = new Date();
-    const oneYearAgo = new Date(today);
-    oneYearAgo.setDate(today.getDate() - 365);
+    // Filter to current year and map to our format
+    const currentYear = new Date().getFullYear();
+    const startOfYear = new Date(currentYear, 0, 1);
 
     return data.contributions
-      .filter((day: GithubContributionDay) => new Date(day.date) >= oneYearAgo)
+      .filter((day: GithubContributionDay) => new Date(day.date) >= startOfYear)
       .map((day: GithubContributionDay) => ({
         date: day.date,
         count: day.count,
@@ -86,12 +85,7 @@ export async function fetchLeetCodeActivity(): Promise<ActivityDay[]> {
       }
     };
 
-    const [currentYearData, prevYearData] = await Promise.all([
-      fetchYear(currentYear),
-      fetchYear(prevYear),
-    ]);
-
-    const submissionCalendar = { ...prevYearData, ...currentYearData };
+    const submissionCalendar = await fetchYear(currentYear);
     const countMap = new Map<string, number>();
 
     // submissionCalendar keys are unix timestamps in seconds
@@ -102,19 +96,25 @@ export async function fetchLeetCodeActivity(): Promise<ActivityDay[]> {
       countMap.set(dateStr, (countMap.get(dateStr) || 0) + submissionCalendar[timestampStr]);
     });
 
-    // Generate dates for the last 365 days
+    // Generate dates for the current year (Jan 1 to Today)
     const days: ActivityDay[] = [];
+    const startOfYear = new Date(currentYear, 0, 1);
     const today = new Date();
 
-    for (let i = 364; i >= 0; i--) {
-      const d = new Date(today);
-      d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split("T")[0];
+    // Calculate total days from Jan 1 to today
+    const diffTime = Math.abs(today.getTime() - startOfYear.getTime());
+    const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-      days.push({
-        date: dateStr,
-        count: countMap.get(dateStr) || 0,
-      });
+    for (let i = 0; i <= totalDays; i++) {
+        const d = new Date(startOfYear);
+        d.setDate(d.getDate() + i);
+        if (d > today) break;
+
+        const dateStr = d.toISOString().split("T")[0];
+        days.push({
+            date: dateStr,
+            count: countMap.get(dateStr) || 0,
+        });
     }
 
     return days;

@@ -23,7 +23,7 @@ export default async function Home() {
 
         <BentoGrid>
           {/* 1. About */}
-          <BentoCard className="md:col-span-2 md:row-span-1">
+          <BentoCard className="md:col-span-2 md:row-span-1" disableModal={true}>
             <div className="flex flex-col h-full justify-between">
               <div className="flex items-start justify-between">
                 <Terminal className="h-8 w-8 text-zinc-500" />
@@ -32,7 +32,7 @@ export default async function Home() {
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">About</h3>
+                <h3 className="text-2xl font-semibold mb-2">About</h3>
                 <p className="text-zinc-400 text-sm">
                   Building high-performance systems and low-latency trading infrastructure.
                   Obsessed with optimization, clean architecture, and minimalistic design.
@@ -44,7 +44,7 @@ export default async function Home() {
           {/* 2. Social media, contact details */}
           <BentoCard className="md:col-span-1 md:row-span-1">
              <div className="flex flex-col h-full justify-between">
-              <h3 className="text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2 mb-2">
+              <h3 className="text-sm font-mono font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2 mb-2">
                 Social media, contact details
               </h3>
               <div className="flex flex-col gap-4 items-center justify-center h-full">
@@ -83,7 +83,7 @@ export default async function Home() {
                 <div className="flex flex-col gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-lg text-zinc-100">Distributed Object Storage</h3>
+                            <h3 className="font-semibold text-xl text-zinc-100">Distributed Object Storage</h3>
                             <a href="#s3-deep-dive" className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors">
                                 <ArrowUpRight className="h-4 w-4" />
                             </a>
@@ -94,7 +94,7 @@ export default async function Home() {
                     </div>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                             <h3 className="font-semibold text-lg text-zinc-100">Algo-Trading Bot</h3>
+                             <h3 className="font-semibold text-xl text-zinc-100">Algo-Trading Bot</h3>
                              <a href="#algo-deep-dive" className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors">
                                 <ArrowUpRight className="h-4 w-4" />
                              </a>
@@ -118,13 +118,13 @@ export default async function Home() {
                 </div>
                  <div className="flex flex-col gap-4">
                     <div>
-                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">Tamil AI Podcast</h3>
+                        <h3 className="font-semibold text-lg mb-1 text-zinc-200">Tamil AI Podcast</h3>
                         <p className="text-xs text-zinc-400">
                             Democratizing AI knowledge.
                         </p>
                     </div>
                     <div>
-                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">Civic-Tech Ideas</h3>
+                        <h3 className="font-semibold text-lg mb-1 text-zinc-200">Civic-Tech Ideas</h3>
                         <p className="text-xs text-zinc-400">
                             Open-source tools for governance.
                         </p>
@@ -143,7 +143,7 @@ export default async function Home() {
                     </span>
                 </div>
                  <div>
-                    <h3 className="font-semibold text-lg mb-2 text-zinc-200">Contributions</h3>
+                    <h3 className="font-semibold text-xl mb-2 text-zinc-200">Contributions</h3>
                     <p className="text-sm text-zinc-400">
                         Active contributor to high-performance systems and developer tooling ecosystems.
                         Focused on Rust and Go projects.
@@ -162,7 +162,7 @@ export default async function Home() {
                     </span>
                 </div>
                  <div>
-                    <h3 className="font-semibold text-lg mb-2 text-zinc-200">Technical Insights</h3>
+                    <h3 className="font-semibold text-xl mb-2 text-zinc-200">Technical Insights</h3>
                     <p className="text-sm text-zinc-400 mb-4">
                         Deep dives into system architecture, low-latency optimization, and distributed systems patterns.
                         Sharing knowledge on building scalable infrastructure.
@@ -185,13 +185,13 @@ export default async function Home() {
                 </div>
                  <div className="flex flex-col gap-4">
                     <div>
-                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">Global Rust Hackathon</h3>
+                        <h3 className="font-semibold text-lg mb-1 text-zinc-200">Global Rust Hackathon</h3>
                         <p className="text-xs text-zinc-400">
                             Winner - Best Systems Tool category.
                         </p>
                     </div>
                     <div>
-                        <h3 className="font-semibold text-sm mb-1 text-zinc-200">ICPC Regionalist</h3>
+                        <h3 className="font-semibold text-lg mb-1 text-zinc-200">ICPC Regionalist</h3>
                         <p className="text-xs text-zinc-400">
                             Top 50 team in Asia West continent.
                         </p>
@@ -210,7 +210,7 @@ export default async function Home() {
                     </span>
                 </div>
                  <div className="flex flex-col gap-4">
-                    <h3 className="font-semibold text-lg mb-2 text-zinc-200">Technical Arsenal</h3>
+                    <h3 className="font-semibold text-xl mb-2 text-zinc-200">Technical Arsenal</h3>
                     <div className="flex flex-wrap gap-2">
                         <SkillTag variant="default" glowing>Rust</SkillTag>
                         <SkillTag variant="default" glowing>Go</SkillTag>
@@ -233,12 +233,12 @@ export default async function Home() {
            </BentoCard>
 
           {/* 9. github activity */}
-          <BentoCard className="md:col-span-3">
+          <BentoCard className="md:col-span-3" disableModal={true}>
              <ActivityHeatmap title="github activity" data={githubData} />
           </BentoCard>
 
           {/* 10. Leetcode Activity */}
-          <BentoCard className="md:col-span-3">
+          <BentoCard className="md:col-span-3" disableModal={true}>
              <ActivityHeatmap title="Leetcode Activity" variant="orange" data={leetcodeData} />
           </BentoCard>
 
