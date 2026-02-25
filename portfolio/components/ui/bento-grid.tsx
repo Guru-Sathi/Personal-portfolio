@@ -2,6 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { Modal } from "./modal";
 
 export const BentoGrid = ({
   className,
@@ -31,26 +33,48 @@ export const BentoCard = ({
   children?: React.ReactNode;
   variant?: "default" | "creative" | "ghost";
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const variants = {
-    default: "bg-zinc-950 border-zinc-800 hover:border-zinc-700",
-    creative: "bg-zinc-950 border-zinc-800 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]",
+    default: "bg-zinc-900/70 border-zinc-700/60 hover:bg-zinc-900 hover:border-zinc-500 transition-all duration-300 backdrop-blur-md",
+    creative: "bg-gradient-to-br from-zinc-900/80 to-purple-900/20 border-zinc-800 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]",
     ghost: "bg-transparent border-transparent hover:bg-zinc-900/50",
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className={cn(
-        "row-span-1 rounded-xl group/bento transition duration-200 shadow-none p-4 border justify-between flex flex-col space-y-4",
-        variants[variant],
-        className
-      )}
-    >
-      {children}
-    </motion.div>
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        onClick={() => setIsModalOpen(true)}
+        className={cn(
+          "row-span-1 rounded-xl group/bento transition duration-200 shadow-none p-4 border justify-between flex flex-col space-y-4 cursor-pointer",
+          variants[variant],
+          className
+        )}
+      >
+        {children}
+      </motion.div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className="p-6">
+          <h2 className="text-xl font-bold mb-4 text-zinc-100">Details</h2>
+          <div className="space-y-4 text-zinc-400">
+            <p>
+              This modal contains more detailed information about the selected item.
+              Currently, this is placeholder data to demonstrate the modal functionality.
+            </p>
+            <div className="h-32 bg-zinc-800/50 rounded-lg animate-pulse w-full"></div>
+            <p className="text-sm">
+              In a full implementation, this would show project statistics, detailed descriptions,
+              links, or other relevant content specific to this card.
+            </p>
+          </div>
+        </div>
+      </Modal>
+    </>
   );
 };
 
