@@ -49,58 +49,57 @@ export async function fetchGithubActivity(): Promise<ActivityDay[]> {
 
 export async function fetchLeetCodeActivity(): Promise<ActivityDay[]> {
   try {
-    // Note: LeetCode can be picky about headers, especially User-Agent and Referer.
-    const response = await fetch("https://leetcode.com/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Referer": "https://leetcode.com/",
-      },
-      body: JSON.stringify({
-        query: `
-          query userProfileCalendar($username: String!, $year: Int) {
-            matchedUser(username: $username) {
-              userCalendar(year: $year) {
-                submissionCalendar
+    const currentYear = new Date().getFullYear();
+    const prevYear = currentYear - 1;
+
+    // Helper to fetch a specific year
+    const fetchYear = async (year: number) => {
+      try {
+        const response = await fetch("https://leetcode.com/graphql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Referer": "https://leetcode.com/",
+          },
+          body: JSON.stringify({
+            query: `
+              query userProfileCalendar($username: String!, $year: Int) {
+                matchedUser(username: $username) {
+                  userCalendar(year: $year) {
+                    submissionCalendar
+                  }
+                }
               }
-            }
-          }
-        `,
-        variables: { username: LEETCODE_USERNAME },
-      }),
-      next: { revalidate: 3600 },
-    });
+            `,
+            variables: { username: LEETCODE_USERNAME, year },
+          }),
+          next: { revalidate: 3600 },
+        });
 
-    if (!response.ok) {
-        console.error("Failed to fetch LeetCode activity:", response.statusText);
-        // Try to read the error body
-        try {
-            const errorBody = await response.text();
-            console.error("LeetCode Error Body:", errorBody);
-        } catch { /* ignore */ }
-        return [];
-    }
+        if (!response.ok) return {};
+        const json = await response.json();
+        const calStr = json?.data?.matchedUser?.userCalendar?.submissionCalendar;
+        return calStr ? JSON.parse(calStr) : {};
+      } catch (error) {
+        console.error(`Error fetching LeetCode activity for year ${year}:`, error);
+        return {};
+      }
+    };
 
-    const json = await response.json();
+    const [currentYearData, prevYearData] = await Promise.all([
+      fetchYear(currentYear),
+      fetchYear(prevYear),
+    ]);
 
-    if (json.errors) {
-        console.error("LeetCode API Errors:", json.errors);
-        return [];
-    }
-
-    const calendarStr = json?.data?.matchedUser?.userCalendar?.submissionCalendar;
-
-    if (!calendarStr) return [];
-
-    const submissionCalendar = JSON.parse(calendarStr);
+    const submissionCalendar = { ...prevYearData, ...currentYearData };
     const countMap = new Map<string, number>();
 
     // submissionCalendar keys are unix timestamps in seconds
     Object.keys(submissionCalendar).forEach((timestampStr) => {
-        const timestamp = parseInt(timestampStr);
-        const date = new Date(timestamp * 1000);
-        const dateStr = date.toISOString().split('T')[0];
-        countMap.set(dateStr, (countMap.get(dateStr) || 0) + submissionCalendar[timestampStr]);
+      const timestamp = parseInt(timestampStr);
+      const date = new Date(timestamp * 1000);
+      const dateStr = date.toISOString().split("T")[0];
+      countMap.set(dateStr, (countMap.get(dateStr) || 0) + submissionCalendar[timestampStr]);
     });
 
     // Generate dates for the last 365 days
@@ -108,18 +107,17 @@ export async function fetchLeetCodeActivity(): Promise<ActivityDay[]> {
     const today = new Date();
 
     for (let i = 364; i >= 0; i--) {
-        const d = new Date(today);
-        d.setDate(d.getDate() - i);
-        const dateStr = d.toISOString().split('T')[0];
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const dateStr = d.toISOString().split("T")[0];
 
-        days.push({
-            date: dateStr,
-            count: countMap.get(dateStr) || 0
-        });
+      days.push({
+        date: dateStr,
+        count: countMap.get(dateStr) || 0,
+      });
     }
 
     return days;
-
   } catch (error) {
     console.error("Error fetching LeetCode activity:", error);
     return [];
