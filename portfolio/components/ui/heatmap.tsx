@@ -49,8 +49,8 @@ export const ActivityHeatmap = ({
   return (
     <div className="flex flex-col gap-4 w-full h-full p-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-mono text-zinc-400">{title}</h3>
-        <span className="text-xs font-mono text-zinc-500">Last 365 days</span>
+        <h3 className="text-xl font-semibold text-zinc-200 capitalize">{title}</h3>
+        <span className="text-xs font-mono text-zinc-500">{new Date().getFullYear()}</span>
       </div>
 
       <div className="flex-1 w-full overflow-x-auto pb-2 scrollbar-hide">
